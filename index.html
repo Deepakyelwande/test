@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .div1 {
+      height: 50vh;
+      width: 60vw;
+      background-color: aqua;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .div2 {
+      height: 30vh;
+      width: 20vw;
+      background-color: black;
+
+
+    }
+
+    div {
+      min-height: 100px;
+      min-width: 100px;
+      padding: 30px;
+      border: 1px solid black;
+    }
+  </style>
+
+
+
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+  <!-- <div class="div1">
+    <div class="div2">hello</div>
+  </div> -->
+
+
+  <button id="btn">Debounce</button><br> <br>
+  <button id="button" style="background-color: red;">Trottle</button>
+
+  <div id="grandparent">
+    <div id="parent">
+      <div id="child">
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    //  function outer() {
+    //     var a = 10;
+    //     function inner() {
+    //         console.log(a);
+    //     }
+    //     return inner;
+
+    // }
+    //  outer()()
+    // var abc = outer()
+    // abc()
+    // function a() {
+    //     let a = "ABC";
+    //     function b() {
+    //         a = "abc"
+    //         a();
+    //     }
+    //     b()
+    // }
+    // *****************************************
+    // function a() {
+    //     let a = "ABC";
+    //     return function b() {
+    //         let b = "DEF"
+    //         console.log(a, b);
+
+    //     }
+    // }
+    // let x =x()
+    // *********************************************
+    // var y = 1;
+    // if (function f() { 
+
+    // }) {
+    //     y += typeof f;
+
+    // }
+    // console.log(y)
+    // *********************************************
+    // const arr1 = [6, 2, 8, 1, 2];
+    // const arr2 = [4, 2, 1, 3, 9];
+    // const arr3 = arr1.concat(arr2);
+    // let uniqueChars = [...new Set(arr3)];
+    // let ans = uniqueChars.sort()
+    // console.log(ans);
+    // ******************************************
+
+    // var obj = {
+    //     name: 'Raj',
+    //     address:
+    //     {
+    //         city: "Noida"
+    //     }
+    // }
+    // const { name, address: { city } } = obj  //destructuring
+    // console.log(city)
+    // ****************************************
+    // var a = {
+    //     no1: 10,
+
+    // }
+    // var b = a;
+
+    // b.no1++
+
+    // console.log(a, b);
+    // *******************************
+    // function add(...args) {
+
+    //   return args.reduce((a, b) => a + b);
+
+    // }
+
+    // console.log(add(1, 2, 3, 4, 5, 6, 7))
+    // ***************************************************
+    // const listOfTags = [
+    //     { id: 1, label: "Hello", color: "red", sorting: 0 },
+    //     { id: 2, label: "World", color: "green", sorting: 1 },
+    //     { id: 3, label: "Hello", color: "blue", sorting: 4 },
+    //     { id: 4, label: "Sunshine", color: "yellow", sorting: 5 },
+    //     { id: 5, label: "Hello", color: "red", sorting: 6 },
+    // ]
+
+    // let 
+    // keys = ['label', 'color'], filtered = listOfTags.filter( (s => o => (k => !s.has(k) && s.add(k)) (keys.map(k => o[k]).join('|')) ) (new Set) ); 
+    // console.log(filtered);
+
+    // ****************************
+
+    // let str = "hello world"
+    // str = str.split(" ");
+    // str = str.map(element => {
+    //   return element.slice(0, 1) + element.slice(-1).toUpperCase()
+
+    // });
+    // str = str.join(" ")
+    // console.log(str)
+
+
+    // ===========================================
+    // for (i = 0; i < 10; i++) {
+    //   setTimeout(() => {
+    //     console.log(i);
+    //   }, 1000)
+    // }
+
+    // if (i = 0) {
+    //   var a = 10;
+    // }
+    // console.log(a);
+    // *******************************************
+
+    // sort of array based on number of occurrences in javascript
+
+    // var allTypesArray = ["4", "4", "2", "2", "2", "6", "2", "6", "6"];
+    // var map = allTypesArray.reduce(function (p, c) {
+    //     p[c] = (p[c] || 0) + 1;
+    //     return p;
+    // }, {});
+
+    // var newTypesArray = Object.keys(map).sort(function (a, b) {
+    //     return map[b] - map[a];
+    // });
+
+    // console.log(...newTypesArray)
+
+    // let numbers = [3, 25, 100]
+    // let doubles = numbers.map(num => num * 2)
+    // console.log(num)
+    // *****************************************
+    // for (let i = 0; i < 5; i++) {  //if we write here var the output is 5 times 5 but if we write let output is 01234
+    //     setTimeout(() => {
+    //         console.log(i);
+    //     }, 0)
+    // }
+    // ***************************************************
+
+    // que output of this que
+    // var x;
+    // x = 10;
+    // function test() {
+    //     var x;
+    //     if (x > 20) {
+    //         x = 50
+    //     }
+    //     console.log(x);
+    // }
+    // test();
+
+    // const arr = [1, 2, 3, 3, 3]
+    // console.log([...new Set(arr)].length)
+    // *******************************************
+    // var x = 0;
+    // var y = 4;
+    // if (y) {
+    //     console.log(x);
+
+    // }
+    // if (y) {
+    //     console.log(x);
+    // }
+    // ***************************************
+    // var x;
+    // console.log(x) //-----> undefined
+    // x = 23;
+    // ***********************************
+    // x = 30
+    // console.log(x)   //.....30
+    // var x;
+    // *************************************
+    // var x = 0;
+    // var y = 4;
+    // if (x) {
+    //     console.log(x)
+    // }
+    // if (y) {
+    //     console.log(x)  //========>0
+    // }
+    // *******************************
+    // for (let i = 0; i < 10; i++) {
+    //     setTimeout(function () {
+    //         console.log("the no is", i); //======== 0 to9 but i write var insted of let the output is 10time 10
+    //     })
+    // }
+    // ******************************************
+    // const a = {
+    //     x: 1,
+    //     y: 2,
+
+    // }
+    // const b = a;
+    // b.x = 3;
+    // console.log(a);
+    // console.log(b);
+    // let a = 10;
+    // var a = 20;
+    // console.log(a); //===========>Uncaught SyntaxError: Identifier 'a' has already been
+    // **************************************************************
+
+    // function first() {
+    //     setTimeout(() => {
+    //         console.log("i am set time out");
+    //     }, 0)
+    // }
+
+    // function second() {
+    //     console.log("second");
+
+
+    // }
+    // first();
+    // second();
+
+    // const add = (a, b) => a + b
+    // add(2, 3)
+    // console.log(add);
+
+
+    // const person = {
+    //     firstName: function (country) {
+    //         return this.firstName + " " + this.lastName + "," + "," + country;
+
+    //     }
+    // }
+    // const person1 = {
+    //     firstName: "ram",
+    //     lastName: "kadam"
+    // }
+    // const person2 = {
+    //     firstName: "kkkk",
+    //     lastName: "kadam"
+    // }
+    // console.log(person.firstName.bind(person1, ["punr"]));
+
+    // let arr = [1, 32, 54, 5, 5];
+    // const rst = arr.map((x) => x * 2)
+    // console.log(...rst);
+    // ***************************************************
+    // let arr = [1, 32, 54, 5, 5];
+    // const rst = arr.reduce((a, j) => a + j)
+    // console.log(rst);
+    // ****************************************************
+
+
+    // const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+    // const result = words.filter((x) => x.length > 6)
+    // console.log(result);
+
+
+    // const person = {
+    //     firstName: function (country) {
+    //         return this.firstName + " " + this.lastName + "," + "," + country;
+
+    //     }
+    // }
+    // const person1 = {
+    //     firstName: "ram",
+    //     lastName: "kadam"
+    // }
+    // const person2 = {
+    //     firstName: "kkkk",
+    //     lastName: "kadam"
+    // }
+    // console.log(person.firstName.call(person1,));
+
+
+    // a = 10
+    // console.log(a);
+    // ===========================================================
+    // const arr = [1, 2, 2, 4, 3, 4];
+
+    // const out = arr.filter((e, i, a) => a.indexOf(e) === i)
+    // console.log(...out);
+
+    // =============================================================
+
+    // const a = ['a', 'a', 'b', 'a', 'b', 'c', 'b', 'c'];
+
+    // function count_duplicate(a) {
+    //     let counts = {}
+
+    //     for (let i = 0; i < a.length; i++) {
+    //         if (counts[a[i]]) {
+    //             counts[a[i]] += 1
+    //         } else {
+    //             counts[a[i]] = 1
+    //         }
+    //     }
+    //     console.log(counts)
+
+    // }
+
+    // count_duplicate(a)
+
+    //==========================================================
+    // const a = ['a', 'a', 'b', 'a', 'b', 'c', 'b', 'c'];
+    // const a = "aaaabbc"
+
+    // function dup(a) {
+    //     let counts = {};
+    //     for (let i = 1; i < a.length; i++) {
+    //         if (counts[a[i]]) {
+    //             counts[a[i]] ++;
+
+    //         } else {
+    //             counts[a[i]] = 1
+    //         }
+    //     }
+    //     console.log(counts);
+
+    // }
+    // dup(a);
+
+    //======================================================
+    //    interview que****************
+
+    // function outer() {
+
+    //     function inner() {
+    //         var a = 20
+    //         console.log(a + b);
+    //     }
+    //     var b = 10;
+    //     return inner();
+    // }
+    // console.log(outer)()();
+
+
+    //         var iter = 0;
+    // function counter() {
+    //     console.log('show at ' + (iter++));
+    //     setTimeout(counter, 1000);
+    // }
+
+    // counter();
+    // ====================================
+    // const pm=(n)=>{
+    //     for(var i=1;i<=n;i++){
+    //         setTimeout(()=>{
+    //             console.log(i);
+    //         },i*5000)
+    //     }
+    // }
+    // pm(5)
+
+
+
+    // ======================================
+    // console.log("first");
+    // setTimeout(() => {
+    //     console.log("second");
+    // }, 0)
+    // let promise = new Promise((res, rej) => {
+    //     console.log("third");
+    //     res("fouth")
+    // });
+    // promise.then((val) => {
+    //     console.log(val);
+    // })
+    // setTimeout(() => {
+    //     console.log("fifth");
+    // }, 10)
+    // console.log("sixth");
+    // ==> output:
+    //first
+    // third
+    // sixth
+    // fouth
+    // second
+    // fifth
+    // ===============================================
+    // ("a"-1)
+    // (2+"-2"+"2")
+    // "2-22"
+    // ("he"+"78")
+    // "he78"
+    // ("he"-"w"+78)
+    // (false+true)
+    // (false-true+1)
+    // ==================================================
+    // const arr = ["Akbar ", "Aswin"]
+    // let op = arr.map((i) => i.toLowerCase()).reverse()
+    // // let aa=op.
+    // console.log(...op);
+
+    // ===================================================
+    // let person = {
+    //     firstName: "ram",
+    //     LastName: "kumar"
+    // }
+    // const { firstName, LastName } = person
+    // console.log(firstName);
+
+    // ======================================================
+    // const arr = [1, 2, 2, 4, 3, 4];
+    // const op = arr.map((x) => x * 4)
+    // console.log(op);
+    // ==============================================
+    // for (var i = 0; i < 10; i++) {
+    //     setTimeout(() => {
+    //         console.log(i);
+
+    //     }, 1000)
+    // }
+    // console.log(i);
+
+    // =======================================
+    // program to check the number of occurrence of a character
+
+    //  const a = "aaaabbc"
+
+    //     function dup(a) {
+    //         let counts = {};
+    //         for (let i = 1; i < a.length; i++) {
+    //             if (counts[a[i]]) {
+    //                 counts[a[i]] ++;
+
+    //             } else {
+    //                 counts[a[i]] = 1
+    //             }
+    //         }
+    //         console.log(counts);
+
+    //     }
+    //     dup(a);
+
+
+    // ======================================
+    // const points = [40, 100, 1, 5, 25, 10];
+
+    // // Sort the numbers in ascending order
+    // let op=points.sort((a,b)=>b-a)
+    // console.log(...op);
+    // ==================================================
+    // function person(){
+    //     (this.name = "jack"),
+    //     (this.age=25),
+    //     (this.say),
+    //     (this.sayName=function(){
+    //         console.log(this.age);
+    //        let innerFunc=()=>{
+    //            console.log(this.age);
+
+    //        }
+    //        innerFunc()
+    //     })
+    // }
+    // const x= new person();
+    // x.sayName()
+    // ===============================================
+    // function outer(){
+    //     function inner(){
+    //         var a=20;
+    //         console.log(a+b);
+
+    //     }
+    //     var b=10;
+    //     return inner
+    // }
+    // console.log(outer()());
+    // ==============================
+    // const print=(n)=>{
+    //     for(let i=1;i<=n;i++){
+    //         setTimeout(()=>{
+    //             console.log(i);
+    //         },i*5000)
+    //     }
+    // }
+    // print(5)
+    // ============================
+    // for (let i = 0; i < 3; ++i) {
+    //     setTimeout(() => {
+    //         console.log(i);
+    //     }, i * 1000)
+
+    // }
+    // ==============================================
+    // function Myfunction() {
+    //     function abc() {
+    //         console.log(this);
+
+    //     }
+    //     abc()
+    // }
+    // Myfunction()
+
+    // output===>Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+    // =====================================================
+    // pronises
+    // const abc=new Promise((res,rej)=>{
+    //     setTimeout(()=>{
+    //         let roll_no=[1,2,3,4,5];
+    //         // res(roll_no)
+    //         rej("error while communicating on network");
+
+    //     },5000)
+
+    // })
+    // abc.then((roll_no)=>{
+    // console.log(roll_no);
+    // }).catch((err)=>{
+    // console.log(err);
+    // })
+    // =============================================
+
+    // const arr = [2, 3, 2, 4, 4, 5, 1, 1]
+    // const out=arr.filter((e,i,a)=>a.indexOf(e)===i)
+
+
+    // console.log(out);
+    // ==========================================
+    // const points =[1,100,500,20,-100,12,10]
+
+    // // Sort the numbers in ascending order
+    // let op = points.sort((a, b) => a - b)
+    // console.log(...op);
+
+    // ========================================
+    // function compareNumeric(a, b) {
+    //   if (a > b) return 1;
+    //   if (a == b) return 0;
+    //   if (a < b) return -1;
+    // }
+
+    // let arr = [1,100,500,20,-100,12,10]
+
+    // arr.sort(compareNumeric);
+
+    // console.log(arr);
+    // ===================================
+
+    // const arr = [9,10,14,1,2,2,3,4,5,14,10,9,5,6,6,7,8]
+
+
+    // let op= arr.filter((e, i, a) => a.indexOf(e) !== i)
+    //  console.log(op);
+
+    //  =============================
+    // const arr = [[1,2],[3,4],[5,6]]
+    // const output = Object.fromEntries([...arr]);
+    // console.log(output);
+    // =============================
+    // for (var a = 1; a <= 5; a++) {
+    //     for (var b = 1; b <= a; b++) {
+    //         document.write(b)
+    //     }
+    //     document.write("<br>");
+    // }
+
+    // ====================================================
+
+    // const add=(a,b)=>{
+    //     return a+b
+    // }
+    // console.log(add(10,20));
+    // =================================================
+
+    //
+
+    // ======================================
+    // const arr=[1,2,5,4,5,5]
+    // let op=arr.reduce((a,b)=>a+b)
+    // console.log(op);
+    //=================================
+    // const arr=[1,1,2,2,3,3,4,4];
+    // let obj={}
+    // obj=arr.reduce((a,c)=>({...a,[c]:c}),{})
+    // console.log(obj);
+
+    //=================================
+    // find the second small no of an array if there are two similar max no present
+    // const arr = [1, 9, 9, 3, 4, 5, 5]
+    // const comp = (item1, item2) => {
+    //     if (item1 < item2) return -1
+    //     if (item1 > item2) return +1
+    //     if (item1 === item2) return 0
+    // }
+    // arr.sort(comp)
+    // if (arr[arr.length - 1] > arr[arr.length - 2]) {
+    //     console.log(arr[arr.length - 2])
+    // } else {
+    //     console.log(arr[arr.length - 3])
+    // }
+
+    //=========================================
+    //         const str = "I evol !tpircsavaj";
+    //         let op = str.split("").reverse().join('')
+
+    // console.log(op);
+
+    // ======================================
+    // const variable1=23;
+    // var variable2=89;
+    // function catchv(){
+    //     console.log(variable1);
+    //     console.log(variable2);
+    // }
+    // catchv();
+    // =================================
+    // function normalf() {
+    //   var a = 34;
+    //   return 22;
+    //   console.log(a);
+    // }
+
+    // normalf();
+
+
+
+
+
+
+    // ==================================
+    // spread operator
+
+    // let arr = [1, 2, 3, 4, 5];
+
+    // let newarr=[...arr]
+    // console.log(newarr);
+
+
+    // rest op
+    // function sd(...arr) {
+    //     return arr
+    // }
+    // let pp = sd(thr, sjr, rrtr, gtrt)
+    // console.log(pp);
+
+    // ============================================
+
+    // let employees = [
+    //     {
+    //         "role": "senior",
+    //         "name": "first",
+    //         "status": true
+    //     },
+    //     {
+    //         "role": "lead",
+    //         "name": "second",
+    //         "status": false
+    //     },
+    //     {
+    //         "role": "lead",
+    //         "name": "third",
+    //         "status": false
+    //     },
+    //     {
+    //         "role": "junior",
+    //         "name": "fourth",
+    //         "status": true
+    //     },
+    //     {
+    //         "role": "senior",
+    //         "name": "none",
+    //         "status": true
+    //     }
+
+    // ]
+    // const out = employees.filter((x) => x.status == true)
+    // console.log(...out);
+    // ====================================================
+    /* Given two arrays of integers, merge them into one sorted array that should contain unique integers.
+     Do not use array.sort() method.B=[1,2,3,5,7], A=[8,10,9,2,3] */
+
+
+
+
+    // =================================================
+    // function showName()
+    // {
+    // console.log(name);
+    // var name="Full Name";
+    // }
+    // showName()
+    // ===================================================
+
+    // 1. find out the second largest number
+    // let ranArray = [22, 33, 89, 24, 56]
+
+
+    // console.log(Math.max(...ranArray));
+
+
+
+    // let arr = [4, 5, 6, 7, 8, 9, 10];
+    // temp = 0;
+
+    // ranArray.forEach((element) => {
+    //     if (temp < element) {
+    //         temp = element;
+    //     }
+    // });
+
+    // console.log(`The largest number in the array: ${temp}`);
+    // =======================================================
+    // 2 .Find out the voules in  your name
+    // let findVowels = (str) => str.match(/[aeiou]/ig);
+    // console.log(findVowels('deepak'));
+
+    // ===================================================
+    // (function () {
+    //     console.log('this is the start');
+
+    //     setTimeout(function cb() {
+    //         console.log('Callback 1: this is a msg from call back');
+    //     });
+
+    //     console.log('this is just a message');
+
+    //     setTimeout(function cb1() {
+    //         console.log('Callback 2: this is a msg from call back');
+    //     }, 0);
+
+    //     console.log('this is the end');
+    // })();
+
+    // output ==>
+    // this is the start
+    // this is just a message
+    // this is the end
+    // Callback 1: this is a msg from call back
+    // Callback 2: this is a msg from call back
+    // ==================================================================
+    //ADD THEM AND FIND UNIQUEVALUES
+    // const arr1 = ["collection", "sample", "data", "value"];
+    // const arr2 = ["data", "val", "collection"];
+
+    // let unique1 = arr1.filter((i) => arr2.indexOf(i) === -1);
+    // let unique2 = arr2.filter((i) => arr1.indexOf(i) === -1);
+
+    // const unique = unique1.concat(unique2);
+
+    // console.log(unique);
+    // ===================================================================
+
+    //  AND DUPLICATE VALUES
+    // const array1 = ["collection", "sample", "data", "value"];
+    // const array2 = ["data", "val", "collection"];
+
+    // var duplicates = array1.filter(function (val) {
+    //     return array2.indexOf(val) != -1;
+    // });
+
+    // console.log(duplicates);
+    // ====================================================
+    // const str = "I evol !tpircsavaj";
+
+    // let b = str.split(" ");
+    // let c = b.splice(1, 1);
+    // console.log(c)
+
+    // let d = c.toString().split('').reverse().join('')
+    // console.log(d)
+    // =================================================
+    // const sentense = "I evoL !tpircsavaJ";
+    // const revS = (x, y) => (x.split(y).reverse().join(y));
+    // const rev = revS(sentense, "");
+    // const newString = revS(rev, " ");
+    // console.log(newString)
+
+    // =====================================================
+    // In react show objects which have status true
+
+    // export default function App() {
+    //   let employees = [
+    //     {
+    //       role: "senior",
+    //       name: "first",
+    //       status: true
+    //     },
+    //     {
+    //       role: "lead",
+    //       name: "second",
+    //       status: false
+    //     },
+    //     {
+    //       role: "lead",
+    //       name: "third",
+    //       status: false
+    //     },
+    //     {
+    //       role: "junior",
+    //       name: "fourth",
+    //       status: true
+    //     },
+    //     {
+    //       role: "senior",
+    //       name: "none",
+    //       status: true
+    //     }
+    //   ];
+
+    //   const onChange = () => {
+    //     for (let x of employees) {
+    //       if (x.status === true) {
+    //         console.log(x);
+    //       }
+    //     }
+    //   };
+    //   return (
+    //     <div className="App">
+    //       <button onClick={onChange}> Click Me! </button>
+    //     </div>
+    //   );
+    // }
+    // =============================================================
+    // let a = ["A", "B", "C", "A", "A"];
+    // const a = "aaabbbccc"
+
+    //this method working for bboth array and sting
+    // function dup(a) {
+    //   let counts = {};
+    //   for (let i = 0; i < a.length; i++) {
+    //     if (counts[a[i]]) {
+    //       counts[a[i]]++;
+
+    //     } else {
+    //       counts[a[i]] = 1
+    //     }
+    //   }
+    //   console.log(counts);
+
+    // }
+    // dup(a);
+    // *************************OR*******************************
+    // const a = "aaabbbccc"// is not working for string and
+    // let opp = a.reduce((acc, cur) => {
+    //   if (acc[cur]) {
+    //     acc[cur]++
+    //   } else {
+    //     acc[cur] = 1
+    //   }
+    //   return acc;
+    // }, {})
+    // console.log(opp);
+    // ============================================================
+    // let input = "My name is Deepak";
+    // let op = "Deepak is name My";
+
+    // let str = "My name is Deepak";
+    // let opt = str.split(" ").reverse().join(" ")
+    // console.log(opt);
+    // ==============================================
+    // let input = ["the", "quick", "brown", "fox"];
+    // // output = [3, 5, , 5, 3];
+    // let output = input.map((i) => i.length);
+    // console.log(output);
+
+    // ===============================================
+    // find logest  word in string
+    // findLongestWord = (str) => {
+    //   var newstr = str.split(" ");
+    //   var sortedarr = newstr.sort((a, b) => b.length - a.length)
+    //   return sortedarr[0].length;
+    // }
+    // console.log(findLongestWord("The quick brown fox jumped over the lazy llllllllllllll"));
+    // =====================================================
+    //que find the longest string in paragraph
+
+    // let str = "this is javascript"
+
+    //   let a = str.split(" ");
+    //   let b = a.sort((a, b) => {
+    //   if (a.length > b.length) return -1;
+    //   if (a.length == b.length) return 0;
+    //   if (a.length < b.length) return 1;
+
+    // })
+    // console.log(b[0]);
+
+    //*********************************** ORRRRR ************************
+    // let longestWord = (string) => {
+    //   var str = string.split(" ");
+    //   var longest = 0;
+    //   var word = null;
+    //   for (var i = 0; i < str.length; i++) {
+    //     if (longest < str[i].length) {
+    //       longest = str[i].length;
+    //       word = str[i];
+
+
+    //     }
+    //   }
+    //   return word;
+    // }
+    // console.log(longestWord("Pride and Prejudice"));
+
+    // ==============================================================
+
+    // let input = "full stack tutorial";
+    // let op = "Deepak is name My";
+
+    // let str = "full stack tutorial";
+    // let opt = str.split("").reverse().join("")
+    // console.log(opt);
+    // // =======================================
+    // let data = fetch('https://jsonplaceholder.typicode.com/posts');
+    // data.then((item) => item.json().then((rst) => {
+    //   console.log(rst);
+    // }))
+    // =====================================================================
+    // que find the longest string in paragraph
+
+    // const str = " mern stack developer";
+
+    // const longestword = (str) => {
+    //   const strarray = str.split(" ");
+    //   const sortedarray = strarray.sort((a, b) => (b.length - a.length))
+    //   return sortedarray[0];
+    // };
+    // console.log(longestword(str));
+    // ======================================================
+    // print all the value pairs on screen
+    // const input = {
+    //   "props": {
+    //     "obj1": {
+    //       "key1": "val1",
+    //       "key2": "val2",
+    //       "key3": "val3",
+    //       "key4": "val4",
+    //       "key5": "val5",
+    //     },
+    //     "obj2": {
+    //       "key1": "val1",
+    //       "key2": "val2",
+    //       "key3": "val3",
+    //       "key4": "val4",
+    //       "key5": "val5",
+    //     },
+    //     "obj3": {
+    //       "key1": "val1",
+    //       "key2": "val2",
+    //       "key3": "val3",
+    //       "key4": "val4",
+    //       "key5": "val5",
+    //     }
+
+    //   }
+
+    // }
+
+
+    // Object.keys(input["props"]).forEach(function (key) {
+    //   console.log(input["props"][key]);
+    // });
+    // ======================================================
+
+    // const newfun = (str1, str2) => {
+
+    //   var arr = new Array;
+    //   for (letter in [...str2]) {
+    //     arr[letter] = str2[str2.length - letter];
+    //   }
+    //   arr[arr.length] = str2[0]
+    //   arr = str1 + (arr.join(""));
+    //   arr = arr.replace("%", "");
+    //   arr = arr.replace(arr[0], arr[0].toUpperCase());
+    //   return (arr);
+    // }
+
+    // console.log(newfun('java', 'tpi%rcs'))
+
+    // =============================OR==================================
+    //   function myFunction(a, b) {
+    //   const func = x => x.replace('%','');
+    //   const first = func(a);
+    //   const second = func(b).split('').reverse().join('');
+    //   return first.charAt(0).toUpperCase() + first.slice(1) + second;
+    // }
+
+    //  console.log(myFunction('java', 'tpi%rcs'))
+    // ==================================================
+    //expected output kay
+    // const arr = [{ a: 1, b: 2 }, { c: 3, d: 4 }]
+    // let obj = {};
+    // obj = arr.reduce((acc, cur) => ({ ...acc, [cur]: cur }), {})
+
+    // console.log(obj);
+    // ==================================================
+    // (function () {
+    //   var a = b = 3;
+    // })();
+
+    // console.log("a defined? " + (typeof a == 'undefined'));
+    // console.log(b,"b defined? " + (typeof b == 'undefined'));
+    // ================================================
+    // create new object of same id and course id
+    // [{
+    //   name: "raj", id: 1,
+    //   couse: "react",
+    //   courseId: 1
+    // },
+    // {
+    //   name: "Antony", id: 2,
+    //   couse: "java",
+    //   courseId: 2
+    // },
+    // {
+    //   name: "abdul", id: 3,
+    //   couse: "node",
+    //   courseId: 3
+    // }
+
+    // ]
+    // const arrop = [];
+    // let arr1
+    // for (let i = 0; i <  arr1.length - 1; i++) {
+
+    //   if (arr1[i].id === arr2[i].courseId) {
+    //     let obj = {}
+    //     obj[name] = arr1[i][name];
+    //     obj[id] = arr1[i][id];
+    //     obj[couse] = arr2[i][course];
+    //     obj[courseId] = arr2[i][courseId];
+    //   }
+    //   arrop.push(obj)
+    // }
+    // console.log(arrop);
+    // ===========================================================
+    // for (var i = 1; i <= 5; i++) {
+    //   for (var j = 1; j <= i; j++) {
+    //    document.write(j)
+    //   }
+    //  document.write("<br>")
+    // }
+
+    // ============================================================= 
+    // debouncing 
+    let debouncefunc = (func, delay) => {
+      let timer
+      return () => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          func.apply(this)
+        }, delay)
+      }
+    }
+    let btn = document.getElementById("btn");
+    btn.addEventListener("click", debouncefunc(() => {
+      console.log("debonce");
+    }, 2000))
+    // ======================================================== 
+
+
+    // throttling 
+    var trottle = document.getElementById("button")
+    function throttleFun(func, delay) {
+      let prev = 0;
+      return function () {
+        let now = new Date().getTime()
+        if (now - prev > delay) {
+          prev = now
+          return func()
+        }
+      }
+    }
+    trottle.addEventListener("click", throttleFun(function () {
+      console.log("throttle");
+    }, 2000))
+
+    // ======================================================================= 
+    document.getElementById("grandparent").addEventListener("click", function () {
+      console.log("grandparent");
+    })
+    document.getElementById("parent").addEventListener("click", function () {
+      console.log("parent");
+    })
+    document.getElementById("child").addEventListener("click", function (e) {
+      e.stopPropagation()
+      console.log("child");
+    })//third parameter of all eventlistener is true/false by default it is false means event bubbling ,true means capturing 
+    // ======================================================================================  
+    // what is the op of following code 
+    // function xyz() {
+    //   let i = 0;
+    //   return function () {
+    //     console.log(i++);
+    //   }
+    // }
+    // xyz()();//0
+    // let funA = xyz();
+    // funA();//0
+    // funA();//1
+    // funA();//2
+    // xyz()();//0
+    // ======================================================================= 
+    // what is the output of following function (closure) 
+    // var addSix = createBase(6)
+    // addSix(10) //return 16
+    // addSix(21) //return 27
+    // // solution
+    // function createBase(a) {
+    //   return (b) => {
+    //     console.log(a + b);
+    //     return a + b
+    //   }
+    // }
+    // ========================================================== 
+    // console.log("tricky", !!10 + 20);//The double exclamation makes the integer to bool so 10 becomes true and is considered as 1 due to this 1 + 20. 
+    // // So. It will print 21
+    // let x = 0;
+    // console.log(x++);// 0 reason post increment
+    // ============================================================ 
+    const arr1 = ["collection", "sample", "data", "value"];
+    const arr2 = ["data", "val", "collection"];
+
+    // let unique1 = arr1.filter((i) => arr2.indexOf(i) === -1);
+    // let unique2 = arr2.filter((i) => arr1.indexOf(i) === -1);
+
+    // const unique = unique1.concat(unique2);
+
+    // console.log(unique);
+    //====================  ORRRRRRRRRRRRR===========
+    const unique = [...arr1, ...arr2]
+    var arr3=[] 
+    for (let i = 0; i < unique.length; i++) {
+      if (unique.indexOf(unique[i]) === i) {
+        arr3.push(unique[i])
+      }
+    }
+    console.log(arr3);
+
+
+    // ============================================
+
+  </script>
+</body>
+
+</html>
